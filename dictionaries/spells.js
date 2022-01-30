@@ -32,8 +32,12 @@ let spellData = [
         name: 'equal',
         numberIngredients: 2,
     },
+    {
+        name: 'times',
+        numberIngredients: 2,
+    },
 
-    //subtract
+    //subtract, ifThen, while, and, or
 
     
 ]

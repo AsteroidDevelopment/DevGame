@@ -19,6 +19,7 @@ let runeData = [
         value: "1",
         kind: "number"
     },
+    //5
     {
         value: "2",
         kind: "number"
@@ -30,5 +31,13 @@ let runeData = [
     {
         value: "false",
         kind: "truth"
+    },
+    {
+        value: "_",
+        kind: "blank"
+    },
+    {
+        value: "5",
+        kind: "number"
     }
 ]

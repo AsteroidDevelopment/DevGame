@@ -47,3 +47,20 @@
     margin: 0;
     padding:14px;
 }
+
+
+
+.pbentry {
+    background-color: #3331;
+    margin:.25rem;
+    padding:.5rem;
+    border: 1px solid #0001;
+}
+
+
+.pbspellargs {
+    display:flex;
+}
+.pbspellargs > div {
+    padding: .25rem;
+}
