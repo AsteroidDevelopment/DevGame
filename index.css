@@ -1,0 +1,49 @@
+#runes > span, #spells > span, #talismans > span, #special > span, #run > span  {
+    padding: .5rem;
+    margin: .5rem;
+    display:inline-block;
+}
+
+#runes > span {
+    background-color: #ccf;
+}
+#spells > span {
+    background-color: #fcf;
+}
+#talismans > span {
+    background-color: #cff;
+}
+#special > span {
+    background-color: #fcc;
+}
+#run > span {
+    background-color: #cfc;
+    width:100%;
+    text-align:center;
+}
+
+.line {
+    background: #ffc;
+    min-height: 16px;
+}
+
+#main {
+    display:flex;
+}
+
+#left {
+
+}
+
+#right {
+    width: 320px;
+}
+#output, #level { text-align: right; }
+
+#toolbar {
+    display: flex;
+}
+#toolbar h3 {
+    margin: 0;
+    padding:14px;
+}

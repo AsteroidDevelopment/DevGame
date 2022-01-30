@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="index.css" />
+
+<head>
+
+</head>
+
+<body>
+    <div id='main'>
+
+        <div id="left">
+            <div id="toolbar">
+                <div>
+                    <h3>Runes</h3>
+                    <h3>Talismans</h3>
+                    <h3>Spells</h3>
+                    <h3>Misc.</h3>
+                </div>
+                <div>
+                    <div id="runes"></div>
+                    <div id="talismans"></div>
+                    <div id="spells"></div>
+                    <div id="special">
+                        <span data-value="newline" data-kind="special" class="codeButton">New Line</span>
+                        <span data-value="backspace" data-kind="special" class="codeButton">Backspace</span>
+                        <span data-value="clear" data-kind="special" class="codeButton">Clear All</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div id="code"></div>
+        </div>
+
+        <div id="right">
+            <h5>Level</h5>
+            <div id="level"></div>
+            <hr />
+            <h5>Your Output</h5>
+            <div id="output"></div>
+            <hr />
+
+            <div id="run">
+                <span data-value="run" data-kind="special" class="codeButton">Run</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="./dictionaries/levels.js"></script>
+    <script src="./dictionaries/runes.js"></script>
+    <script src="./dictionaries/spells.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+
+
+</html>
