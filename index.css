@@ -1,4 +1,4 @@
-#runes > span, #spells > span, #talismans > span, #special > span, #run > span  {
+#toolbar-options > div > span, #special > span, #run > span  {
     padding: .5rem;
     margin: .5rem;
     display:inline-block;
@@ -13,22 +13,25 @@
 #talismans > span {
     background-color: #cff;
 }
+#rituals > span {
+    background-color: #ffc;
+}
+#ingredients > span {
+    background-color: #fcc;
+}
 #special > span {
     background-color: #fcc;
 }
 #run > span {
     background-color: #cfc;
-    width:100%;
+    display:block;
     text-align:center;
-}
-
-.line {
-    background: #ffc;
-    min-height: 16px;
 }
 
 #main {
     display:flex;
+    justify-content: space-between;
+    padding: 2rem;
 }
 
 #left {
@@ -40,8 +43,16 @@
 }
 #output, #level { text-align: right; }
 
+
 #toolbar {
+    background: #efefef;
+    padding:1rem;
+}
+#toolbar-headers {
     display: flex;
+}
+#toolbar-options {
+    background: #fff;
 }
 #toolbar h3 {
     margin: 0;
@@ -63,4 +74,36 @@
 }
 .pbspellargs > div {
     padding: .25rem;
+}
+
+#toolbar-headers h3:not(.toolbar-active) {
+    color:#888;
+}
+
+#toolbar-headers .toolbar-active {
+    background-color: #fff;
+}
+
+#toolbar-options > div:not(.toolbar-active) {
+    display:none;
+}
+
+
+#ritual-selection {
+    display: flex;
+}
+
+.code {
+    min-height:12px;
+    background:#6661;
+    margin: 12px;
+}
+
+.activeCode {
+    background:#0001;
+}
+
+#ritual-selection h3 {
+    margin: 12px;
+    padding: 12px;
 }

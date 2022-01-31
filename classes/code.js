@@ -1,10 +1,21 @@
 
 class Code {
-    constructor() {
+    constructor(name = "", argmumentCount = 0) {
         this.buffer = []
-        this.talismans = [new Talisman(0), new Talisman(1), new Talisman(2)]
+        this.talismans = {}
         this.output = []
         this.parsedBuffer = []
+
+        this.name = name
+        this.argmumentCount = argmumentCount
+    }
+
+    createTalisman() {
+        let num = Object.entries(code.talismans).length + 1
+        let name = prompt("Please enter talisman name", `Talisman ${num}`);
+        let t = new Talisman(name)
+        this.talismans[name] = t
+        this.print()
     }
 
     addCommand(item) {
@@ -13,7 +24,15 @@ class Code {
     }
 
     addTalismanCommand(index) {
-        this.addCommand({ kind: 'talisman', index: index - 1 })
+        this.addCommand({ kind: 'talisman', index: index })
+    }
+
+    addCodeCommand(name) {
+        this.addCommand({ kind: 'ritual', name: name })
+    }
+
+    addIngredientCommand(index) {
+        this.addCommand({ kind: 'ingredient', index: index })
     }
 
     backspace() {
@@ -30,6 +49,7 @@ class Code {
 
     newLine() {
         this.buffer.push({ kind: 'newline' })
+        this.print()
     }
 
     checkLevel() {
@@ -46,33 +66,42 @@ class Code {
             levels[currentLevel].forEach((r) => levelElem.innerHTML += `<div>${r}</div>`)
             this.clear()
             levelElem.style.backgroundColor = 'green'
-            window.setTimeout( () => {
-                levelElem.style.backgroundColor = 'transparent'}, 500)
+            window.setTimeout(() => {
+                levelElem.style.backgroundColor = 'transparent'
+            }, 500)
         }
     }
 
-    run() {
+    run(compiler, args) {
+        console.log(compiler, args)
+
         let output = document.getElementById('output')
         output.innerHTML = ``
         this.output = []
 
-        this.parse()
-        this.execute()
+        this.parse(compiler, args)
+        let lastValue = this.execute(compiler, args)
+        console.log(lastValue)
 
-        this.talismans = [new Talisman(0), new Talisman(1), new Talisman(2)]
+        //this.talismans = {}
 
         this.checkLevel()
+        return lastValue
     }
 
-    execute() {
-        this.parsedBuffer.forEach((a) => a.execute(this))
+    execute(compiler, args) {
+        let lastValue = null
+        this.parsedBuffer.forEach((a) => {
+            lastValue = a.execute(this, args)
+        })
+        return lastValue
     }
 
-    parse(pos = 0) {
+    parse(compiler, args, pos = 0) {
         this.parsedBuffer = []
 
         while (pos < this.buffer.length) {
-            let spellParse = this.parseSpell(pos)
+            let spellParse = this.parseSpell(compiler, args, pos)
             this.parsedBuffer.push(spellParse.result)
             pos = spellParse.pos + 1
         }
@@ -80,46 +109,70 @@ class Code {
         return this.parsedBuffer
     }
 
-    parseSpell(pos = 0) {
+    parseSpell(compiler, args, pos = 0) {
         let spell = this.buffer[pos]
-        let args = []
+        let spellArgs = []
 
         if (spell.kind === 'newline') { pos += 1; spell = this.buffer[pos]; }
-        if (spell.constructor.name !== 'Spell') { console.log(`COMPLILE WARNING: pos ${pos} should be spell`) }
 
-        while (args.length < spell.numberIngredients) {
+        let argCount = 0
+        if (spell.kind === 'ritual') {
+            spell = compiler.codes[spell.name] 
+            argCount = spell.argmumentCount
+        } else if (spell.constructor.name === 'Spell') {
+            argCount = spell.numberIngredients
+        }
+
+        while (spellArgs.length < argCount) {
             pos += 1
             let value = this.buffer[pos]
 
             if (value) {
-                if (value.constructor.name === "Spell") {
-                    let subparse = this.parseSpell(pos)
+                if (value.constructor.name === "Spell" || value.kind === 'ritual') {
+                    let subparse = this.parseSpell(compiler, args, pos)
                     value = subparse.result
                     pos = subparse.pos
-                } else if(value.kind === 'talisman') {
+                } else if (value.kind === 'talisman') {
                     value = this.talismans[value.index]
                 }
             }
             else {
-                value = runes[8]
+                value = runes[0]
             }
 
-            args.push(value)
+            spellArgs.push(value)
         }
 
-        let result = { result: new ParsedBufferNode({ spell, args }), pos }
+
+        let result = { result: new ParsedBufferNode({ spell, args: spellArgs }), pos }
         return result
 
     }
 
     print() {
-        this.parse()
+        this.parse(compiler, )
 
-        let elem = document.getElementById('code')
+        let elem = document.getElementById(`code-${this.name}`)
         elem.innerHTML = ""
 
-        this.parsedBuffer.map( (parsedBufferNode) => {
+        this.parsedBuffer.map((parsedBufferNode) => {
             elem.innerHTML += `<div class="pbline">${parsedBufferNode.print()}</div>`
         })
+
+
+        if (compiler.activeCodeName === this.name) {
+            let talismanElem = document.getElementById('talismans')
+            talismanElem.innerHTML = Object.entries(this.talismans).map((t) => `<span data-value="${t[0]}"  data-kind="talisman" class="codeButton" >${t[0]}</span>`).join("")
+
+            let ingredientElem = document.getElementById('ingredients')
+            ingredientElem.innerHTML = ""
+            for (let i = 0; i < this.argmumentCount; i++) {
+                ingredientElem.innerHTML += `<span data-value="${i}"  data-kind="ingredient" class="codeButton" >Arg ${i + 1}</span>`
+            }
+
+        }
+
+        let buttons = document.querySelectorAll('.codeButton')
+        buttons.forEach((b) => b.addEventListener("click", addButton))
     }
 }

@@ -1,8 +1,9 @@
 
 class Spell {
-    constructor({ name, numberIngredients }) {
+    constructor({ name, numberIngredients, display }) {
         this.name = name
         this.numberIngredients = numberIngredients
+        this.display = display || name
     }
 
     call(ingredients, code) {
@@ -14,7 +15,7 @@ class Spell {
                 let output = document.getElementById('output')
                 output.innerHTML += `<div>${ingredients[0].value}</div>`
                 code.output.push(ingredients[0].value)
-                return ingredients[0].value
+                return ingredients[0]
             case "add":
                 return ingredients[0].add(ingredients[1])
             case "set":
@@ -61,6 +62,10 @@ class Spell {
                 t.kind = 'truth'
 
                 return t
+
+                
+            case "return":
+                return ingredients[0]
 
         }
     }

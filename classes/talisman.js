@@ -1,6 +1,6 @@
 class Talisman {
-    constructor(index) {
-        this.index = index
+    constructor(name) {
+        this.name = name || ""
         this.value = "_"
         this.kind = "blank"
     }
