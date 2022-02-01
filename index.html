@@ -10,6 +10,15 @@
     <div id='main'>
 
         <div id="left">
+            <div id="code-box">
+                <div id="ritual-space">
+                </div>
+                <div id="ritual-selection">
+                </div>
+            </div>
+            <div id="special">
+            </div>
+
             <div id="toolbar">
                 <div id="toolbar-headers">
                     <h3 class="toolbar-active">Runes</h3>
@@ -19,38 +28,46 @@
                     <h3>Ingredients</h3>
                 </div>
                 <div id="toolbar-options">
-                    <div id="runes" class="toolbar-active"></div>
-                    <div id="talismans"></div>
-                    <div id="spells"></div>
-                    <div id="rituals"></div>
-                    <div id="ingredients"></div>
-                </div>
-            </div>
-            <div id="special">
-                <span data-kind="create-talisman" class="codeButton">+ Talisman</span>
-                <span data-kind="create-ritual" class="codeButton">+ Ritual</span>
-                <span data-value="newline" data-kind="special" class="codeButton">New Line</span>
-                <span data-value="backspace" data-kind="special" class="codeButton">Backspace</span>
-                <span data-value="clear" data-kind="special" class="codeButton">Clear All</span>
-            </div>
-
-            <hr />
-
-            <div id="code-box">
-                <div id="ritual-selection">
-                </div>
-                <div id="ritual-space">
+                    <div id="runes" class="toolbar-active">
+                        <div class="subbar"></div>
+                        <div class="screen"></div>
+                    </div>
+                    <div id="talismans">
+                        <div class="subbar"><span data-kind="create-talisman" class="codeButton">+ Talisman</span></div>
+                        <div class="screen"></div>
+                    </div>
+                    <div id="spells">
+                        <div class="subbar"></div>
+                        <div class="screen"></div>
+                    </div>
+                    <div id="rituals">
+                        <div class="subbar"><span data-kind="create-ritual" class="codeButton">+ Ritual</span></div>
+                        <div class="screen"></div>
+                    </div>
+                    <div id="ingredients">
+                        <div class="subbar"></div>
+                        <div class="screen"></div>
+                    </div>
                 </div>
             </div>
 
         </div>
 
         <div id="right">
-            <h5>Level</h5>
-            <div id="level"></div>
+            <div id="special">
+                <span data-value="backspace" data-kind="special" class="codeButton">Backspace</span>
+                <span data-value="clear" data-kind="special" class="codeButton">Clear</span>
+                <span data-value="reset" data-kind="special" class="codeButton">Reset</span>
+            </div>
+            <div id="level-box">
+                <h5>Level</h5>
+                <div id="level"></div>
+            </div>
             <hr />
-            <h5>Your Output</h5>
-            <div id="output"></div>
+            <div id="output-box">
+                <h5>Your Output</h5>
+                <div id="output"></div>
+            </div>
             <hr />
 
             <div id="run">
@@ -60,17 +77,7 @@
 
     </div>
 
-    <script src="./classes/compiler.js"></script>
-    <script src="./classes/rune.js"></script>
-    <script src="./classes/talisman.js"></script>
-    <script src="./classes/parsedBufferNode.js"></script>
-    <script src="./classes/spell.js"></script>
-    <script src="./classes/code.js"></script>
-
-    <script src="./dictionaries/levels.js"></script>
-    <script src="./dictionaries/runes.js"></script>
-    <script src="./dictionaries/spells.js"></script>
-    <script src="./index.js"></script>
+    <script src="./index.js" type="module"></script>
 
 </body>
 

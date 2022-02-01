@@ -1,0 +1,235 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+.codeButton  {
+    padding: .5rem;
+    margin: .5rem;
+    display:inline-block;
+    cursor: pointer;
+    color:#555;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.codeButton:hover {
+    color: #000;
+    border: 1px solid #999;
+}
+
+#runes .screen .codeButton {
+    background-color: #ccf;
+}
+#spells .screen .codeButton {
+    background-color: #fcf;
+}
+#talismans .screen .codeButton {
+    background-color: #cff;
+}
+#rituals .screen .codeButton {
+    background-color: #ffc;
+}
+#ingredients .screen .codeButton {
+    background-color: #fcc;
+}
+#special .codeButton {
+    background-color: #fcc;
+}
+#run .codeButton {
+    background-color: #cfc;
+    display:block;
+    text-align:center;
+}
+
+#runes .subbar .codeButton {
+    border: 1px solid #ccf;
+}
+#spells .subbar .codeButton {
+    border: 1px solid#fcf;
+}
+#talismans .subbar .codeButton {
+    border: 1px solid #cff;
+}
+#rituals .subbar .codeButton {
+    border: 1px solid #ffc;
+}
+#ingredients .subbar .codeButton {
+    border: 1px solid #fcc;
+}
+
+
+
+#special {
+    text-align:right;
+}
+
+
+
+
+#main {
+    display:flex;
+    justify-content: space-between;
+    width: 960px;    
+    height: 720px;
+    background: #f9f9f9;
+    margin: 2rem;
+}
+
+#left {
+    width:640px;
+    padding:1rem;
+}
+
+#right {
+    width: 320px;
+    padding:1rem;
+}
+#output, #level { text-align: right; }
+
+
+#toolbar {
+    background: #efefef;
+    padding:1rem;
+}
+#toolbar-headers {
+    display: flex;
+}
+#toolbar-options {
+    background: #fff;
+}
+#toolbar h3 {
+    margin: 0;
+    padding:14px;
+}
+
+#level-box, #output-box {
+    height: 200px;
+    background: #efefef;
+    padding: 1rem;
+}
+#level, #output {
+    background:white;
+    margin:1rem 0;
+    padding:1rem;
+}
+
+.pbentry {
+    background-color: #3331;
+    margin:.25rem;
+    padding:.5rem;
+    border: 1px solid #0001;
+}
+
+.pbline {
+    margin:1rem;
+}
+
+.pbspellargs {
+    display:flex;
+}
+.pbspellargs > div {
+    padding: .25rem;
+}
+#toolbar-headers h3 {
+cursor: pointer;
+}
+
+#toolbar-headers h3:not(.toolbar-active) {
+    color:#888;
+}
+
+#toolbar-headers .toolbar-active {
+    background-color: #fff;
+}
+
+#toolbar-options > div:not(.toolbar-active) {
+    display:none;
+}
+
+
+#ritual-selection {
+    display: flex;
+}
+
+.code {
+    height:380px;
+    overflow-y:scroll;
+    background:#6661;
+}
+
+.activeCode {
+    background:#0001;
+}
+#ritual-space > div.activeCode {
+    display:block;
+}
+#ritual-space > div:not(.activeCode) {
+    display:none;
+}  
+
+#ritual-selection .codeButton{
+    margin: 0 1rem 1rem 0;
+}
+#ritual-selection h3 {
+    margin: 0;
+    padding: 12px;
+    cursor: pointer;
+}
+
+
+.activeFilter {
+    font-weight: bold;
+    color:black;
+}
+
+.screen {
+    height:100px;
+    overflow-y: scroll;
+}

@@ -29,4 +29,29 @@ class Talisman {
         return newTalisman
     }
 
+    subtract(incoming) {
+        let newTalisman = new Talisman()
+        newTalisman.set(this)
+
+        if (this.kind === 'number' && incoming.kind === 'number') {
+            newTalisman.value = Number.parseInt(newTalisman.value) - Number.parseInt(incoming.value)
+            newTalisman.kind = "number"
+        } else if (this.kind === 'letter') {
+            newTalisman.value = `${newTalisman.value.replaceAll(incoming.value, '')}`
+            newTalisman.kind = "letter"
+        }
+        return newTalisman
+    }
+    
+    pop() {
+        let retValue = this.value.charAt(this.value.length)
+        this.value = this.value.substring(0, -1)
+
+        let newTalisman = new Talisman()
+        newTalisman.kind = this.kind
+        newTalisman.value = retValue
+
+        return newTalisman
+    }
+
 }

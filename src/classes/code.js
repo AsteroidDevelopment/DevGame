@@ -3,7 +3,6 @@ class Code {
     constructor(name = "", argmumentCount = 0) {
         this.buffer = []
         this.talismans = {}
-        this.output = []
         this.parsedBuffer = []
 
         this.name = name
@@ -12,7 +11,7 @@ class Code {
 
     createTalisman() {
         let num = Object.entries(code.talismans).length + 1
-        let name = prompt("Please enter talisman name", `Talisman ${num}`);
+        let name = prompt("Please enter talisman name", `Talisman${num}`);
         let t = new Talisman(name)
         this.talismans[name] = t
         this.print()
@@ -47,17 +46,12 @@ class Code {
         this.print()
     }
 
-    newLine() {
-        this.buffer.push({ kind: 'newline' })
-        this.print()
-    }
-
     checkLevel() {
         let cl = levels[currentLevel]
 
-        let check = this.output.length === cl.length
+        let check = compiler.output.length === cl.length
         if (check) {
-            this.output.forEach((o, i) => o === cl[i] ? "" : check = false)
+            compiler.output.forEach((o, i) => o == cl[i] ? "" : check = false)
         }
         if (check) {
             currentLevel += 1
@@ -67,7 +61,7 @@ class Code {
             this.clear()
             levelElem.style.backgroundColor = 'green'
             window.setTimeout(() => {
-                levelElem.style.backgroundColor = 'transparent'
+                levelElem.style.backgroundColor = '#fff'
             }, 500)
         }
     }
@@ -75,9 +69,6 @@ class Code {
     run(compiler, args) {
         console.log(compiler, args)
 
-        let output = document.getElementById('output')
-        output.innerHTML = ``
-        this.output = []
 
         this.parse(compiler, args)
         let lastValue = this.execute(compiler, args)
@@ -161,10 +152,10 @@ class Code {
 
 
         if (compiler.activeCodeName === this.name) {
-            let talismanElem = document.getElementById('talismans')
+            let talismanElem = document.querySelector('#talismans .screen')
             talismanElem.innerHTML = Object.entries(this.talismans).map((t) => `<span data-value="${t[0]}"  data-kind="talisman" class="codeButton" >${t[0]}</span>`).join("")
 
-            let ingredientElem = document.getElementById('ingredients')
+            let ingredientElem = document.querySelector('#ingredients .screen')
             ingredientElem.innerHTML = ""
             for (let i = 0; i < this.argmumentCount; i++) {
                 ingredientElem.innerHTML += `<span data-value="${i}"  data-kind="ingredient" class="codeButton" >Arg ${i + 1}</span>`
