@@ -1,11 +1,32 @@
+import spellData from '../dictionaries/spells.js'
+import Talisman from './talisman.js'
 
-class Spell {
+export default class Spell {
     constructor({ name, numberIngredients, display, categories }) {
         this.name = name
         this.numberIngredients = numberIngredients
         this.display = display || name
         this.categories = categories
     }
+
+    static getSpells() {
+        return spellData.map(r => new Spell(r))
+    }
+
+    static getSpellCategories() {
+        let spellCategories = ['all']
+
+        spellData.forEach((spell) => {
+            spell.categories.forEach((c) => {
+                if (!spellCategories.includes(c)) {
+                    spellCategories.push(c)
+                }
+            })
+        })
+
+        return spellCategories
+    }
+
 
     call(ingredients, code) {
         let t = new Talisman()
@@ -17,7 +38,7 @@ class Spell {
                 console.log("CASTING", ingredients[0].value)
                 let output = document.getElementById('output')
                 output.innerHTML += `<div>${ingredients[0].value}</div>`
-                compiler.output.push(ingredients[0].value)
+                game.compiler.output.push(ingredients[0].value)
                 return ingredients[0]
 
             case "add":

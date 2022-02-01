@@ -1,4 +1,4 @@
-let runeData = [
+export default  [
     {
         value: "_",
         kind: "blank"

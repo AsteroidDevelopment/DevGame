@@ -1,4 +1,4 @@
-class Talisman {
+export default class Talisman {
     constructor(name) {
         this.name = name || ""
         this.value = "_"

@@ -1,4 +1,4 @@
-const levels = [
+export default [
     ['a'],
     ['a', 'a'],
     ['a', 'b', 'b', 'a'],

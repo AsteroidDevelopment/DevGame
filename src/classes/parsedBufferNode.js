@@ -1,13 +1,40 @@
-class ParsedBufferNode {
+export default class ParsedBufferNode {
     constructor({ spell, args }) {
         this.spell = spell
         this.args = args
     }
 
+    static parse(buffer, args, pos) {
+        let spell = buffer[pos.i]
+        let spellArgs = []
+
+        let argCount = 0
+        if (spell.kind === 'ritual') {
+            spell = game.compiler.codes[spell.name]
+            argCount = spell.argmumentCount
+        } else if (spell.constructor.name === 'Spell') {
+            argCount = spell.numberIngredients
+        }
+
+        while (spellArgs.length < argCount) {
+            pos.i += 1
+            let value = buffer[pos.i]
+
+            if (value) {
+                if (value.constructor.name === "Spell" || value.kind === 'ritual') {
+                    value = ParsedBufferNode.parse(buffer, args, pos)
+                } 
+            } 
+            //default to the 'blank' rune for parsing
+            else { value = game.runes[0] }
+            spellArgs.push(value)
+        }
+
+        return new ParsedBufferNode({ spell, args: spellArgs })
+
+    }
+
     execute(code, args) {
-
-        console.log(args, this.args)
-
         if (this.spell.constructor.name === 'Code') {
             return this.spell.run(compiler, this.args.map((a) => {
                 if (a.constructor.name === 'ParsedBufferNode') {
@@ -67,6 +94,7 @@ class ParsedBufferNode {
     }
 
     print() {
+        console.log(this)
         return `<div class="pbentry">
             <div class="pbspellname">${this.spell.display || this.spell.name}</div>
             <div class="pbspellargs">${this.args.map((a) => {

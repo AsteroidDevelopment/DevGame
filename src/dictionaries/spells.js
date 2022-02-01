@@ -1,4 +1,4 @@
-let spellData = [
+export default  [
     {
         name: 'cast',
         numberIngredients: 1,

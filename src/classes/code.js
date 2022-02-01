@@ -1,12 +1,31 @@
+import Talisman from './talisman.js'
+import ParsedBufferNode from './parsedBufferNode.js'
 
-class Code {
+export default class Code {
     constructor(name = "", argmumentCount = 0) {
-        this.buffer = []
-        this.talismans = {}
-        this.parsedBuffer = []
-
         this.name = name
         this.argmumentCount = argmumentCount
+
+        this.talismans = {}
+
+        this.buffer = []
+        this.parsedBuffer = []
+
+    }
+
+    /*
+
+    Basic Set / Get / Utility functions
+
+    */
+    backspace() {
+        this.buffer = this.buffer.slice(0, -1)
+        this.print()
+    }
+
+    clear() {
+        this.buffer = []
+        this.print()
     }
 
     createTalisman() {
@@ -17,13 +36,18 @@ class Code {
         this.print()
     }
 
+    /*
+
+    Main add functions
+
+    */
     addCommand(item) {
         this.buffer.push(item)
         this.print()
     }
 
     addTalismanCommand(index) {
-        this.addCommand({ kind: 'talisman', index: index })
+        this.addCommand( this.talismans[index] )
     }
 
     addCodeCommand(name) {
@@ -34,53 +58,28 @@ class Code {
         this.addCommand({ kind: 'ingredient', index: index })
     }
 
-    backspace() {
-        this.buffer = this.buffer.slice(0, -1)
-        this.print()
-    }
 
-    clear() {
-        this.buffer = []
-        let output = document.getElementById('output')
-        output.innerHTML = ``
-        this.print()
-    }
 
-    checkLevel() {
-        let cl = levels[currentLevel]
+    /*
 
-        let check = compiler.output.length === cl.length
-        if (check) {
-            compiler.output.forEach((o, i) => o == cl[i] ? "" : check = false)
+    Parse & execution functions
+
+    */
+    parse(args) {
+        this.parsedBuffer = []
+        let pos = {i:0}
+
+        while (pos.i < this.buffer.length) {
+            this.parsedBuffer.push(ParsedBufferNode.parse(this.buffer, args, pos))
+            pos.i += 1
         }
-        if (check) {
-            currentLevel += 1
-            let levelElem = document.getElementById('level')
-            levelElem.innerHTML = ""
-            levels[currentLevel].forEach((r) => levelElem.innerHTML += `<div>${r}</div>`)
-            this.clear()
-            levelElem.style.backgroundColor = 'green'
-            window.setTimeout(() => {
-                levelElem.style.backgroundColor = '#fff'
-            }, 500)
-        }
+
+        console.log(this.parsedBuffer)
+        return this.parsedBuffer
     }
-
-    run(compiler, args) {
-        console.log(compiler, args)
-
-
-        this.parse(compiler, args)
-        let lastValue = this.execute(compiler, args)
-        console.log(lastValue)
-
-        //this.talismans = {}
-
-        this.checkLevel()
-        return lastValue
-    }
-
-    execute(compiler, args) {
+    
+    execute(args) {
+        this.parse(args)
         let lastValue = null
         this.parsedBuffer.forEach((a) => {
             lastValue = a.execute(this, args)
@@ -88,60 +87,13 @@ class Code {
         return lastValue
     }
 
-    parse(compiler, args, pos = 0) {
-        this.parsedBuffer = []
+    /*
 
-        while (pos < this.buffer.length) {
-            let spellParse = this.parseSpell(compiler, args, pos)
-            this.parsedBuffer.push(spellParse.result)
-            pos = spellParse.pos + 1
-        }
+    Print functions
 
-        return this.parsedBuffer
-    }
-
-    parseSpell(compiler, args, pos = 0) {
-        let spell = this.buffer[pos]
-        let spellArgs = []
-
-        if (spell.kind === 'newline') { pos += 1; spell = this.buffer[pos]; }
-
-        let argCount = 0
-        if (spell.kind === 'ritual') {
-            spell = compiler.codes[spell.name] 
-            argCount = spell.argmumentCount
-        } else if (spell.constructor.name === 'Spell') {
-            argCount = spell.numberIngredients
-        }
-
-        while (spellArgs.length < argCount) {
-            pos += 1
-            let value = this.buffer[pos]
-
-            if (value) {
-                if (value.constructor.name === "Spell" || value.kind === 'ritual') {
-                    let subparse = this.parseSpell(compiler, args, pos)
-                    value = subparse.result
-                    pos = subparse.pos
-                } else if (value.kind === 'talisman') {
-                    value = this.talismans[value.index]
-                }
-            }
-            else {
-                value = runes[0]
-            }
-
-            spellArgs.push(value)
-        }
-
-
-        let result = { result: new ParsedBufferNode({ spell, args: spellArgs }), pos }
-        return result
-
-    }
-
+    */
     print() {
-        this.parse(compiler, )
+        this.parse()
 
         let elem = document.getElementById(`code-${this.name}`)
         elem.innerHTML = ""
@@ -150,8 +102,7 @@ class Code {
             elem.innerHTML += `<div class="pbline">${parsedBufferNode.print()}</div>`
         })
 
-
-        if (compiler.activeCodeName === this.name) {
+        if (game.compiler.activeCodeName === this.name) {
             let talismanElem = document.querySelector('#talismans .screen')
             talismanElem.innerHTML = Object.entries(this.talismans).map((t) => `<span data-value="${t[0]}"  data-kind="talisman" class="codeButton" >${t[0]}</span>`).join("")
 
@@ -162,8 +113,52 @@ class Code {
             }
 
         }
-
-        let buttons = document.querySelectorAll('.codeButton')
-        buttons.forEach((b) => b.addEventListener("click", addButton))
     }
 }
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+
+DOCS
+
+=========================*/
+
+//Buffer stores an array of objects that the user inputs.
+//ex. [ SpellX SpellY Rune1 Rune2 SpellZ Rune3 Rune4 SpellZ Rune1]
+
+
+/*
+ParsedBuffer is an array of ParsedBufferNodes-
+ParsedBufferNodes are a recursive data structure which is the above buffer split up in the actual spell/args pairing
+PBN are a single function call all the way to the base arguments- representing a single "line" of code.
+
+ex. 
+[
+    PRN{
+        spell: SpellX
+        args: [
+            PRN{
+                spell: SpellY
+                args: [Rune1, Rune2]
+            },
+            PRN{
+                spell: SpellZ
+                args: [Rune3]
+            },
+            Rune4
+        ]
+    },
+    PRN{
+        spell: SpellZ
+        args: [Rune1]
+    }
+]
+*/
