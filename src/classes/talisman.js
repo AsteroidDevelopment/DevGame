@@ -19,7 +19,7 @@ export default class Talisman {
             newTalisman.value = Number.parseInt(newTalisman.value) + Number.parseInt(incoming.value)
             newTalisman.kind = "number"
         } else if (this.kind === 'truth' && incoming.kind === 'truth') {
-            newTalisman.value = newTalisman.value === 'true' && incoming.value === 'true'
+            newTalisman.value = `${newTalisman.value === 'true' && incoming.value === 'true'}`
             newTalisman.kind = "truth"
         }
         else {

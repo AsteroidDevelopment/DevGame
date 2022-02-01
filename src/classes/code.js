@@ -2,9 +2,9 @@ import Talisman from './talisman.js'
 import ParsedBufferNode from './parsedBufferNode.js'
 
 export default class Code {
-    constructor(name = "", argmumentCount = 0) {
+    constructor(name = "", numberIngredients = 0) {
         this.name = name
-        this.argmumentCount = argmumentCount
+        this.numberIngredients = numberIngredients
 
         this.talismans = {}
 
@@ -51,7 +51,7 @@ export default class Code {
     }
 
     addCodeCommand(name) {
-        this.addCommand({ kind: 'ritual', name: name })
+        this.addCommand( game.compiler.codes[name] )
     }
 
     addIngredientCommand(index) {
@@ -67,6 +67,7 @@ export default class Code {
     */
     parse(args) {
         this.parsedBuffer = []
+        //use an object with a stupid variable to keep count through the different parses; using integer doesn't work for Javascript reasons
         let pos = {i:0}
 
         while (pos.i < this.buffer.length) {
@@ -74,12 +75,12 @@ export default class Code {
             pos.i += 1
         }
 
-        console.log(this.parsedBuffer)
         return this.parsedBuffer
     }
     
     execute(args) {
         this.parse(args)
+        //Keep track of the last value to "return" it.
         let lastValue = null
         this.parsedBuffer.forEach((a) => {
             lastValue = a.execute(this, args)
@@ -108,11 +109,14 @@ export default class Code {
 
             let ingredientElem = document.querySelector('#ingredients .screen')
             ingredientElem.innerHTML = ""
-            for (let i = 0; i < this.argmumentCount; i++) {
+            for (let i = 0; i < this.numberIngredients; i++) {
                 ingredientElem.innerHTML += `<span data-value="${i}"  data-kind="ingredient" class="codeButton" >Arg ${i + 1}</span>`
             }
 
         }
+
+        //We added buttons above, so we need to attach the event listeners.
+        game.printButtons()
     }
 }
 

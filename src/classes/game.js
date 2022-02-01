@@ -13,15 +13,14 @@ export default class Game {
         game = this
 
         this.compiler = new Compiler(this)
-        
-        this.runeFilter = 'all'
-        this.spellFilter = 'all'
 
         this.runes = Rune.getRunes()
         this.runeKinds = Rune.getRuneKinds()
+        this.runeFilter = 'all'
         
         this.spells = Spell.getSpells()
         this.spellCategories = Spell.getSpellCategories()
+        this.spellFilter = 'all'
 
         this.levels = levels
         this.currentLevel = 0

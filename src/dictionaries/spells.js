@@ -25,7 +25,7 @@ export default  [
         categories: ['basic', 'math', 'string']
     },
     {
-        name: 'set',
+        name: 'setValue',
         numberIngredients: 2,
         display: 'change',
         categories: ['talisman', 'string']
@@ -80,7 +80,7 @@ export default  [
         categories: ['logic']
     },
     {
-        name: 'while',
+        name: 'whileSpell',
         numberIngredients: 2,
         display: 'while',
         categories: ['logic']
@@ -99,7 +99,7 @@ export default  [
         categories: ['logic']
     },
     {
-        name: 'return',
+        name: 'returnValue',
         numberIngredients: 1,
         display: 'return',
         categories: ['logic']

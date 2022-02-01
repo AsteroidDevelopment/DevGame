@@ -34,6 +34,11 @@ export default class Rune {
         talisman.set(this)
         return talisman.add(incoming)
     }
+    subtract(incoming) {
+        let talisman = new Talisman()
+        talisman.set(this)
+        return talisman.subtract(incoming)
+    }
 
 }
 
