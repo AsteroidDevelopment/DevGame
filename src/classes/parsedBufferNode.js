@@ -17,7 +17,7 @@ class ParsedBufferNode {
                 } else {
                     return a
                 }
-            }))
+            })) 
         } else {
             switch (this.spell.name) {
                 case "ifElse":
