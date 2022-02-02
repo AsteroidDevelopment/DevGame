@@ -105,13 +105,6 @@ export default  [
         categories: ['logic']
     },
     {
-        name: 'exit',
-        numberIngredients: 0,
-        display: 'exit',
-        categories: ['logic']
-    },
-
-    {
         name: 'increment',
         numberIngredients: 2,
         display: 'increment',

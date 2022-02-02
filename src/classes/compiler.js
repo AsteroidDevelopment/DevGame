@@ -71,7 +71,9 @@ export default class Compiler {
     //Clears the output and runs the 'main' function.
     run() {
         this.clearOutput()
+        
         this.codes['main'].execute()
+
         game.checkLevel(this.output)
     }
 

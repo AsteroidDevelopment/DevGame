@@ -27,11 +27,6 @@ import wordify from '../spells/wordify/test.js'
 
 import pop from '../spells/pop/test.js'
 
-
-
-// cast 
-// exit
-
 let tests = {
     add,
     subtract,

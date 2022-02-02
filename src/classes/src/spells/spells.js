@@ -2,7 +2,6 @@ import add from './add/main.js'
 import cast from './cast/main.js'
 import divide from './divide/main.js'
 import equal from './equal/main.js'
-import exit from './exit/main.js'
 import exponent from './exponent/main.js'
 import ifElse from './ifElse/main.js'
 import ifThen from './ifThen/main.js'
@@ -31,7 +30,6 @@ export default {
     cast,
     divide,
     equal,
-    exit,
     exponent,
     ifElse,
     ifThen,

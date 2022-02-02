@@ -2,7 +2,7 @@ import Talisman from "../../../talisman.js"
 
 export default (args, code) => {
     let t = new Talisman()
-    if (args[0].kind === args[1].kind && args[0].value === args[1].value) {
+    if (args[0].kind === args[1].kind && args[0].value == args[1].value) {
         t.value = 'true'
         t.kind = 'truth'
     } else {

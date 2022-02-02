@@ -82,10 +82,13 @@ export default class Code {
         this.parse(args)
         //Keep track of the last value to "return" it.
         let lastValue = null
+        let status = {halt: false}
         this.parsedBuffer.forEach((a) => {
-            lastValue = a.execute(this, args)
+            if(!status.halt) {
+                lastValue = a.execute(this, args, status)
+            }
         })
-        return lastValue
+        return status.halt || lastValue
     }
 
     /*
