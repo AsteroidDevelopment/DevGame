@@ -25,15 +25,6 @@ export default class Compiler {
         return this.codes[this.activeCodeName]
     }
 
-    setRuneFilter(kind) {
-        this.runeFilter = kind
-        this.print()
-    }
-    setSpellFilter(category) {
-        this.spellFilter = category
-        this.print()
-    }
-
     clearOutput() {
         let output = document.getElementById('output')
         output.innerHTML = ``
@@ -61,10 +52,10 @@ export default class Compiler {
     }
 
     //Prompts for and adds a new ritual.
-    createRitual() {
+    createRitual(ingCount) {
         let num = Object.entries(this.codes).length + 1
-        let name = prompt("Please enter ritual name", `Ritual${num}`);
-        let ingredientCount = prompt("Please enter ingredient count");
+        let name = `Ritual${num}` //prompt("Please enter ritual name", `Ritual${num}`);
+        let ingredientCount = ingCount || ingCount === 0 ? ingCount : prompt("Please enter ingredient count");
 
         let c = new Code(name, Number.parseInt(ingredientCount))
         this.codes[name] = c

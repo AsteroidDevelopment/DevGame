@@ -26,6 +26,14 @@ export default class Game {
         this.currentLevel = 0
     }
 
+    setRuneFilter(kind) {
+        this.runeFilter = kind
+        this.print()
+    }
+    setSpellFilter(category) {
+        this.spellFilter = category
+        this.print()
+    }
     
     /*
 
@@ -66,13 +74,13 @@ export default class Game {
                 compiler.activeCode().addCommand(this.runes.filter(s => s.value === value)[0])
                 break;
             case "rune-filter":
-                compiler.setRuneFilter(value)
+                this.setRuneFilter(value)
                 break;
             case "spell":
                 compiler.activeCode().addCommand(this.spells.filter(r => r.name === value)[0])
                 break;
             case "spell-filter":
-                compiler.setSpellFilter(value)
+                this.setSpellFilter(value)
                 break;
             case "talisman":
                 compiler.activeCode().addTalismanCommand(value)

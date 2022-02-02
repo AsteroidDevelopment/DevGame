@@ -2,46 +2,67 @@ import {addSpell, addRune, addValueTalisman} from '../../tests/helpers.js'
 
 export default [
     [
-        () => {
-            game.compiler.activeCode().createTalisman()
+        () => { 
             game.compiler.activeCode().createTalisman()
 
             addSpell('setValue')
             game.compiler.activeCode().addTalismanCommand('Talisman1')
-            addValueTalisman('asdf')
+            addRune(0)
+
+            addSpell('whileSpell')
+            addRune('true')
+            addSpell('setValue')
+            game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addSpell('add')
+            game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addRune(1)
             
-            addSpell('setValue')
-            game.compiler.activeCode().addTalismanCommand('Talisman2')
-            addSpell('pop')
-            game.compiler.activeCode().addTalismanCommand('Talisman1')
-
             addSpell('cast')
             game.compiler.activeCode().addTalismanCommand('Talisman1')
-            addSpell('cast')
-            game.compiler.activeCode().addTalismanCommand('Talisman2')
         },
-        ['asd', 'f']
-    ],  
+        [1028]
+    ],    
+
+    
     [
-        () => {
+        () => { 
             game.compiler.activeCode().createTalisman()
             game.compiler.activeCode().createTalisman()
 
             addSpell('setValue')
             game.compiler.activeCode().addTalismanCommand('Talisman1')
-            addSpell('numberfy')
-            addValueTalisman('1111')
+            addRune(9)
             
             addSpell('setValue')
             game.compiler.activeCode().addTalismanCommand('Talisman2')
-            addSpell('pop')
-            game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addRune('a')
 
-            addSpell('cast')
+
+            addSpell('whileSpell')
+            addSpell('more')
             game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addRune(1)
+
+            addSpell('add')
+
+            addSpell('setValue')
+            game.compiler.activeCode().addTalismanCommand('Talisman2')
+            addSpell('add')
+            game.compiler.activeCode().addTalismanCommand('Talisman2')
+            addRune('a')
+            
+            addSpell('setValue')
+            game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addSpell('subtract')
+            game.compiler.activeCode().addTalismanCommand('Talisman1')
+            addRune('1')
+            
             addSpell('cast')
             game.compiler.activeCode().addTalismanCommand('Talisman2')
+            addSpell('cast')
+            game.compiler.activeCode().addTalismanCommand('Talisman1')
         },
-        ['111', '1']
-    ],       
+        ['aaaaaaaaa', 1]
+    ],    
+
 ]

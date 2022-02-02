@@ -1,3 +1,7 @@
+
+import setValue from '../spells/setValue/test.js'
+import returnValue from '../spells/returnValue/test.js'
+
 import add from '../spells/add/test.js'
 import subtract from '../spells/subtract/test.js'
 import multiply from '../spells/multiply/test.js'
@@ -5,7 +9,6 @@ import divide from '../spells/divide/test.js'
 import square from '../spells/square/test.js'
 import exponent from '../spells/exponent/test.js'
 import increment from '../spells/increment/test.js'
-
 
 import equal from '../spells/equal/test.js'
 import not from '../spells/not/test.js'
@@ -16,17 +19,18 @@ import or from '../spells/or/test.js'
 import ifThen from '../spells/ifThen/test.js'
 import ifElse from '../spells/ifElse/test.js'
 import times from '../spells/times/test.js'
+import whileSpell from '../spells/whileSpell/test.js'
 
 import numberfy from '../spells/numberfy/test.js'
 import truthify from '../spells/truthify/test.js'
 import wordify from '../spells/wordify/test.js'
 
+import pop from '../spells/pop/test.js'
+
+
+
 // cast 
 // exit
-// whileSpell
-// import setValue from '../spells/setValue/test.js'
-// import returnValue from '../spells/returnValue/test.js'
-//import pop from '../spells/pop/test.js'
 
 let tests = {
     add,
@@ -47,6 +51,10 @@ let tests = {
     numberfy,
     truthify,
     wordify,
+    setValue,
+    pop,
+    whileSpell,
+    returnValue
 }
 
 let compare = (output, expected) => {
@@ -63,6 +71,8 @@ let compare = (output, expected) => {
 
 
 export default () => {
+
+    let spellTotal = 0
 
     Object.entries(tests).forEach((cat) => {
 
@@ -82,8 +92,22 @@ export default () => {
         })
 
         let percent = total/cat[1].length
-        
-        console.log( `${percent === 1 ? 'passed' : 'FAILED'} ${cat[0]} ${total}/${cat[1].length}`)
-
+        if(percent === 1) {
+            spellTotal += 1
+            console.log(`     pass ${cat[0]} ${total}/${cat[1].length}`)
+        } else {
+            console.log(`XX   FAIL ${cat[0]} ${total}/${cat[1].length}`)
+        }
     })
+
+
+    let spellPercent = spellTotal / Object.entries(tests).length
+    
+    if(spellPercent === 1) {
+        spellTotal += 1
+        console.log(`     pass all spells ${spellTotal}/${Object.entries(tests).length}`)
+    } else {
+        console.log(`XX   FAIL all spells ${spellTotal}/${Object.entries(tests).length}`)
+    }
+
 }

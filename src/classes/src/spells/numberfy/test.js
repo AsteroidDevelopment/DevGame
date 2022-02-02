@@ -18,7 +18,7 @@ export default [
         () => {
             addSpell('cast')
             addSpell('numberfy')
-            addRune('blank')
+            addRune('_')
         },
         ['0']
     ],   

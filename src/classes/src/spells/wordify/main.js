@@ -5,7 +5,10 @@ export default (args, code) => {
     t.set(args[0])
     if (t.kind === 'number') {
         t.value = `${t.value}`
-        t.kind = 'letter'
     }
+    if (t.kind === 'blank') {
+        t.value = ``
+    }
+    t.kind = 'letter'
     return t
 }

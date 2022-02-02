@@ -34,10 +34,18 @@ export default class ParsedBufferNode {
     execute(code, args) {
         //If it's a ritual, execute the code after executing each argument.
         if (this.spell.constructor.name === 'Code') {
-            return this.spell.execute( this.executeArguments(args, code) )
+            return this.spell.execute(this.executeArguments(args, code))
         } else {
-        //Most spells are pretty straightforward, but some logical ones have execution catches. Handle them here.
+            //Most spells are pretty straightforward, but some logical ones have execution catches. Handle them here.
             switch (this.spell.name) {
+                case "ifThen":
+                    let checkIf = this.executeNthArgument(0, args, code)
+                    if (checkIf.kind === 'truth' && checkIf.value === 'false' || checkIf.kind === 'number' && checkIf.value == 0) {
+                        return checkIf
+                    } else {
+                        return this.executeNthArgument(1, args, code)
+                    }
+
                 case "ifElse":
                     let check = this.executeNthArgument(0, args, code)
                     if (check.kind === 'truth' && check.value === 'false' || check.kind === 'number' && check.value == 0) {
@@ -53,6 +61,23 @@ export default class ParsedBufferNode {
                     }
                     return times
 
+                case "whileSpell":
+                    let depth = 0
+                    let last = null
+
+                    let whileCheck = this.executeNthArgument(0, args, code)
+                    whileCheck = !(whileCheck.kind === 'truth' && whileCheck.value === 'false' || whileCheck.kind === 'number' && whileCheck.value == 0)
+
+                    while(whileCheck && depth < 1028){
+                        depth += 1
+
+                        last = this.executeNthArgument(1, args, code)
+                        
+                        whileCheck = this.executeNthArgument(0, args, code)
+                        whileCheck = !(whileCheck.kind === 'truth' && whileCheck.value === 'false' || whileCheck.kind === 'number' && whileCheck.value == 0)
+                    }
+                    return last
+
                 default:
                     return this.spell.call(this.executeArguments(args, code), code)
             }
@@ -60,7 +85,7 @@ export default class ParsedBufferNode {
     }
 
     executeArguments(args, code) {
-        return this.args.map((a) => this.executeArgument(a, args, code)  )
+        return this.args.map((a) => this.executeArgument(a, args, code))
     }
 
     executeArgument(a, args, code) {

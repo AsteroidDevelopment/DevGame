@@ -44,8 +44,9 @@ export default class Talisman {
     }
     
     pop() {
-        let retValue = this.value.charAt(this.value.length)
-        this.value = this.value.substring(0, -1)
+        let strVal = `${this.value}`
+        let retValue = strVal.charAt(strVal.length-1)
+        this.value = strVal.substring(0, strVal.length-1)
 
         let newTalisman = new Talisman()
         newTalisman.kind = this.kind

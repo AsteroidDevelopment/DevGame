@@ -46,9 +46,27 @@ export default [
         () => {
             addSpell('cast')
             addSpell('multiply')
-            addRune(3)
             addRune('a')
+            addRune(3)
         },
         ['aaa']
     ],     
+    [
+        () => {
+            addSpell('cast')
+            addSpell('multiply')
+            addRune('a')
+            addRune('a')
+        },
+        ['_']
+    ],
+    [
+        () => {
+            addSpell('cast')
+            addSpell('multiply')
+            addRune(3)
+            addRune('a')
+        },
+        ['_']
+    ],
 ]

@@ -5,7 +5,7 @@ export default (args, code) => {
     let arg = args[0]
     t.kind = 'truth'
     if (arg.kind === 'number') {
-        if (arg.value === 0) { t.value = 'false' }
+        if (arg.value == 0) { t.value = 'false' }
         else { t.value = 'true' }
     } else if (arg.kind === 'letter') {
         t.value = 'true'

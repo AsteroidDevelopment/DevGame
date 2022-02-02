@@ -21,4 +21,12 @@ export default [
         },
         ['truetrue']
     ],    
+    [
+        () => {
+            addSpell('cast')
+            addSpell('wordify')
+            addRune('_')
+        },
+        ['']
+    ],    
 ]

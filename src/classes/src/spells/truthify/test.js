@@ -29,7 +29,7 @@ export default [
         () => {
             addSpell('cast')
             addSpell('truthify')
-            addRune('blank')
+            addRune('_')
         },
         ['false']
     ],    

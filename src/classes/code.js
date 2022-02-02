@@ -29,8 +29,8 @@ export default class Code {
     }
 
     createTalisman() {
-        let num = Object.entries(code.talismans).length + 1
-        let name = prompt("Please enter talisman name", `Talisman${num}`);
+        let num = Object.entries(this.talismans).length + 1
+        let name = `Talisman${num}` //prompt("Please enter talisman name", `Talisman${num}`);
         let t = new Talisman(name)
         this.talismans[name] = t
         this.print()
