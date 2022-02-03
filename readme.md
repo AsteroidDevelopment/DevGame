@@ -16,6 +16,13 @@ Ingredients- arguments
 
 
 
+To Run Locally
+---
+It's just plain JS & HTML, but it uses modules so you just need to serve it someway. I have it set up to use node on my machine but you can use anything.
+`npm install`
+`npm run server`
+
+
 Compiling/Running
 ---
 Step 1. User entry creates an array of objects on compiler object.
