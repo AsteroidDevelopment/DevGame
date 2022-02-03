@@ -3,7 +3,6 @@ import runTests from './classes/src/tests/test.js'
 
 
 new Game({
-    unlocked: false
 }).print()
 
 //runTests()

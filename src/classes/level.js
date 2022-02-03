@@ -1,5 +1,3 @@
-import levelData from '../dictionaries/levels.js'
-
 class Level {
     constructor({ id, kind, category, output, previous, requirements, unlockAt, unlockAfter, spellsAvailable, runesAvailable, text }) {
         this.id = id
@@ -15,46 +13,14 @@ class Level {
         this.text = text
 
         this.progress = {
-            unlocked: false,
-            beaten: false,
-            beatenLines: false,
+            unlocked: !this.previous,
+            completed: false,
+            bestScore: false,
 
         }
     }
 
-    static getLevels() {
-        return levelData.map(l => new Level(l))
-    }
-
-    static getLevelById(levels, id) {
-        return levels.filter(l => l.id === id)[0]
-    }
-
-    static parseStructure(levels) {
-
-        let categories = ['word', 'math', 'logic']
-
-        //separate into categories
-        let catStruct = categories.map(c => levels.filter(l => l.category === c))
-
-        catStruct.forEach(levelList => {
-
-            if (levelList.length === 0) return
-
-            console.log(levelList)
-
-            let first = levelList.filter(l => l.previous === null)[0]
-
-            first.parse(levelList)
-
-            console.log(first)
-
-            let levelSelectElem = document.getElementById('level-select')
-
-            levelSelectElem.innerHTML = first.print()
-
-        })
-    }
+    
 
     parse(levelList) {
         let children = levelList.filter(l => l.previous === this.id)
@@ -66,11 +32,9 @@ class Level {
     }
 
     print() {
-
         let levelChallenges = this.children?.filter(l => l.kind === 'challenge')
         let levelNext = this.children?.filter(l => l.kind === 'normal' || l.kind === 'boss')[0]
         let levelBasic = this.children?.filter(l => l.kind === 'basic')
-
 
         return `<div>
             <div class="row level-select-row">
@@ -102,7 +66,12 @@ class Level {
     }
 
     display() {
-        return `<div class="level-select-choice ${this.kind}">
+        
+        return `<div data-id=${this.id} 
+            class="level-select-choice ${this.kind} 
+            ${this.progress.unlocked ? 'unlocked' : 'locked'} 
+            ${this.progress.completed ? 'completed' : ''} ">
+
             ${this.id}
         </div>`
     }

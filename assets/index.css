@@ -292,7 +292,6 @@ cursor: pointer;
     
 }
 
-
 .activeFilter {
     font-weight: bold;
     color:black;
@@ -316,7 +315,6 @@ cursor: pointer;
     margin:.25rem;
 }
 
-
 #level-select {
     background:white;
     padding:2rem;
@@ -335,7 +333,6 @@ cursor: pointer;
 .col-6 {
     width: fit-content;
 }
-
 
 .basic {
     display:flex;
@@ -399,4 +396,15 @@ cursor: pointer;
 }
 .main .level-select-choice.normal {
     border-color: #6c6;
+}
+
+.locked {
+    color:#ccc;
+}
+.unlocked {
+
+}
+
+.completed {
+    background: #ccc !important;
 }
