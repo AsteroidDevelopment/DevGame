@@ -1,159 +1,197 @@
 export default  [
     {
         value: "_",
-        kind: "blank"
+        kind: "blank",
+        unlock: 12
     },
     {
         value: "a",
-        kind: "letter"
+        kind: "letter",
+        unlock: 0
     },
     {
         value: "b",
-        kind: "letter"
+        kind: "letter",
+        unlock: 2
     },
     {
         value: "c",
-        kind: "letter"
+        kind: "letter",
+        unlock: 13
     },
     {
         value: "d",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "e",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "f",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "g",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "h",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "i",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "j",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "k",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "l",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "m",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "n",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "o",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "p",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "q",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "r",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "s",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "t",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "u",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "v",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "w",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "x",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "y",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "z",
-        kind: "letter"
+        kind: "letter",
+        unlock: 12
     },
     {
         value: "0",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "1",
-        kind: "number"
+        kind: "number",
+        unlock: 3
     },
-    //5
     {
         value: "2",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "3",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "4",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "5",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "6",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "7",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "8",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "9",
-        kind: "number"
+        kind: "number",
+        unlock: 12
     },
     {
         value: "true",
-        kind: "truth"
+        kind: "truth",
+        unlock: 12
     },
     {
         value: "false",
-        kind: "truth"
+        kind: "truth",
+        unlock: 12
     },
 ]

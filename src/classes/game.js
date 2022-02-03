@@ -2,14 +2,13 @@ import Compiler from './compiler.js'
 
 import Rune from './rune.js'
 import Spell from './spell.js'
-import levels from '../dictionaries/levels.js'
+import Level from './level.js'
 
 import { changeToolbar } from '../ui/ui.js'
 
 //Largely deals with UI and master data holding (levels, spells, and runes)
-
 export default class Game {
-    constructor() {
+    constructor(params) {
         game = this
 
         this.compiler = new Compiler(this)
@@ -22,8 +21,12 @@ export default class Game {
         this.spellCategories = Spell.getSpellCategories()
         this.spellFilter = 'all'
 
-        this.levels = levels
-        this.currentLevel = 0
+        this.levels = Level.getLevels()
+        this.currentLevel = 1
+
+        Level.parseStructure(this.levels)
+
+        Object.entries(params).map( (p) => this[p[0]] = p[1] )
     }
 
     setRuneFilter(kind) {
@@ -34,6 +37,10 @@ export default class Game {
         this.spellFilter = category
         this.print()
     }
+
+    getLevel() {
+        return Level.getLevelById(this.levels, this.currentLevel)
+    }
     
     /*
 
@@ -41,7 +48,7 @@ export default class Game {
 
     */
     checkLevel(output) {
-        let cl = this.levels[this.currentLevel]
+        let cl = this.getLevel().output
 
         //First check the length for an easy tell
         let check = output.length === cl.length
@@ -52,7 +59,7 @@ export default class Game {
         if (check) {
             this.currentLevel += 1
             this.compiler.clearAll()
-            this.printLevel()
+            this.print()
 
             //flash the level green, just a little flair
             let levelElem = document.getElementById('level')
@@ -66,7 +73,7 @@ export default class Game {
     addButton = (e) => {
         let kind = e.target.getAttribute('data-kind')
         let value = e.target.getAttribute('data-value')
-        console.log(kind, value)
+        
         let compiler = this.compiler
 
         switch (kind) {
@@ -142,12 +149,29 @@ export default class Game {
     printButtons() {
         let buttons = document.querySelectorAll('.codeButton')
         buttons.forEach((b) => b.addEventListener("click", this.addButton))
+        
+        let spellButtons = document.querySelectorAll('.spellButton')
+        spellButtons.forEach((b) => b.addEventListener("mouseenter", Spell.showHelp))
     }
 
     printLevel() {
         let levelElem = document.getElementById('level')
         levelElem.innerHTML = ""
-        this.levels[this.currentLevel].forEach((r) => levelElem.innerHTML += `<div>${r}</div>`)
+
+        let levelInfoElem = document.getElementById('level-help')
+        levelInfoElem.innerHTML = ""
+
+        let level = this.getLevel()
+
+        level.output.forEach((r) => levelElem.innerHTML += `<div>${r}</div>`)
+
+        levelInfoElem.innerHTML = `<div>
+            <h5>${level.text.name}</h5>
+            <p>${level.text.description}</p>
+            <br />
+            <p>Hints</p>
+            ${ level.text.hints?.map((a, i) => `<p>-${a}</p>`).join("")}
+        </div>`
     }
 
     printHeaders() {
@@ -160,6 +184,7 @@ export default class Game {
         runeElem.innerHTML = ""
 
         let showRunes = this.runeFilter === 'all' ? this.runes : this.runes.filter( (r) => r.kind === this.runeFilter)
+        if(!this.unlocked) { showRunes = showRunes.filter(r => this.currentLevel >= r.unlock) }
         
         showRunes.forEach((rune) => {
             runeElem.innerHTML += `<span data-value="${rune.value}" data-kind="rune" class="${rune.kind} codeButton">
@@ -182,8 +207,10 @@ export default class Game {
         spellsElem.innerHTML = ""
     
         let showSpells = this.spellFilter === 'all' ?  this.spells :  this.spells.filter( (r) => r.categories.includes(this.spellFilter))
+        if(!this.unlocked) { showSpells = showSpells.filter(s => this.currentLevel >= s.unlock) }
+
         showSpells.forEach((spell) => {
-            spellsElem.innerHTML += `<span data-value="${spell.name}" data-kind="spell" class="${spell.category} codeButton" >
+            spellsElem.innerHTML += `<span data-value="${spell.name}" data-kind="spell" class="${spell.category} spellButton  codeButton" >
                 ${spell.display}
             </span>`
         })
@@ -196,5 +223,8 @@ export default class Game {
                 ${category}
             </span>`
         })
+
+        
+        this.printButtons()
     }
 }

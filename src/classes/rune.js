@@ -4,9 +4,10 @@ import runeData from '../dictionaries/runes.js'
 
 export default class Rune {
 
-    constructor({ value, kind }) {
+    constructor({ value, kind, unlock }) {
         this.value = value
         this.kind = kind
+        this.unlock = unlock
     }
 
     static getRunes() {

@@ -54,7 +54,8 @@ export default class Compiler {
     //Prompts for and adds a new ritual.
     createRitual(ingCount) {
         let num = Object.entries(this.codes).length + 1
-        let name = `Ritual${num}` //prompt("Please enter ritual name", `Ritual${num}`);
+        //let name = `Ritual${num}` 
+        let name = prompt("Please enter ritual name", `Ritual${num}`);
         let ingredientCount = ingCount || ingCount === 0 ? ingCount : prompt("Please enter ingredient count");
 
         let c = new Code(name, Number.parseInt(ingredientCount))

@@ -3,87 +3,108 @@
 <link rel="stylesheet" href="index.css" />
 
 <head>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jura:wght@300;500;600;700&family=Merienda:wght@700&family=Staatliches&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div id='main'>
+    <div id="page">
 
-        <div id="left">
-            <div id="code-box">
-                <div id="ritual-space">
+
+        <div id="home">
+            <h1>MystiCoder</h1>
+            <h3>Puzzle game based on a magical programming language</h3>
+        </div>
+
+        <div id='main'>
+
+
+            <div id="left">
+                <div id="code-box">
+                    <div id="ritual-selection">
+                    </div>
+                    <div id="ritual-space">
+                    </div>
                 </div>
-                <div id="ritual-selection">
+
+                <div id="special">
+                    <span data-value="backspace" data-kind="special" class="codeButton">Backspace</span>
+                    <span data-value="clear" data-kind="special" class="codeButton">Clear</span>
+                    <span data-value="reset" data-kind="special" class="codeButton">Reset</span>
+                    <span data-value="run" data-kind="special" class="codeButton">Run</span>
                 </div>
-            </div>
-            <div id="special">
+
+                <div id="toolbar">
+                    <div id="toolbar-headers">
+                        <h3 class="toolbar-active">Runes</h3>
+                        <h3>Talismans</h3>
+                        <h3>Spells</h3>
+                        <h3>Rituals</h3>
+                        <h3>Ingredients</h3>
+                    </div>
+                    <div id="toolbar-options">
+                        <div id="runes" class="toolbar-active">
+                            <div class="subbar"></div>
+                            <div class="screen"></div>
+                        </div>
+                        <div id="talismans">
+                            <div class="subbar"><span data-kind="create-talisman" class="codeButton">+ Talisman</span>
+                            </div>
+                            <div class="screen"></div>
+                        </div>
+                        <div id="spells">
+                            <div class="subbar"></div>
+                            <div class="screen"></div>
+                        </div>
+                        <div id="rituals">
+                            <div class="subbar"><span data-kind="create-ritual" class="codeButton">+ Ritual</span></div>
+                            <div class="screen"></div>
+                        </div>
+                        <div id="ingredients">
+                            <div class="subbar"></div>
+                            <div class="screen"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div id="toolbar">
-                <div id="toolbar-headers">
-                    <h3 class="toolbar-active">Runes</h3>
-                    <h3>Talismans</h3>
-                    <h3>Spells</h3>
-                    <h3>Rituals</h3>
-                    <h3>Ingredients</h3>
-                </div>
-                <div id="toolbar-options">
-                    <div id="runes" class="toolbar-active">
-                        <div class="subbar"></div>
-                        <div class="screen"></div>
+            <div id="right">
+
+                <div id="level-help"></div>
+
+                <div id="level-display">
+                    <div id="output-box">
+                        <h5>Your Output</h5>
+                        <div id="output"></div>
                     </div>
-                    <div id="talismans">
-                        <div class="subbar"><span data-kind="create-talisman" class="codeButton">+ Talisman</span></div>
-                        <div class="screen"></div>
-                    </div>
-                    <div id="spells">
-                        <div class="subbar"></div>
-                        <div class="screen"></div>
-                    </div>
-                    <div id="rituals">
-                        <div class="subbar"><span data-kind="create-ritual" class="codeButton">+ Ritual</span></div>
-                        <div class="screen"></div>
-                    </div>
-                    <div id="ingredients">
-                        <div class="subbar"></div>
-                        <div class="screen"></div>
+                    <div id="level-box">
+                        <h5>Level</h5>
+                        <div id="level"></div>
                     </div>
                 </div>
+
+                <div id="other-help"></div>
+
             </div>
 
         </div>
 
-        <div id="right">
-            <div id="special">
-                <span data-value="backspace" data-kind="special" class="codeButton">Backspace</span>
-                <span data-value="clear" data-kind="special" class="codeButton">Clear</span>
-                <span data-value="reset" data-kind="special" class="codeButton">Reset</span>
-            </div>
-            <div id="level-box">
-                <h5>Level</h5>
-                <div id="level"></div>
-            </div>
-            <hr />
-            <div id="output-box">
-                <h5>Your Output</h5>
-                <div id="output"></div>
-            </div>
-            <hr />
+        <br />
 
-            <div id="run">
-                <span data-value="run" data-kind="special" class="codeButton">Run</span>
-            </div>
-        </div>
+        <h2>Level Select</h2>
+        <div id="level-select"></div>
 
+        <script>
+            //Global variables
+            var game = null;
+        </script>
+
+        <script src="./index.js" type="module"></script>
     </div>
-    
-    <script>
-        //Global variables
-        var game = null;
-    </script>
-
-    <script src="./index.js" type="module"></script>
-
 </body>
 
 

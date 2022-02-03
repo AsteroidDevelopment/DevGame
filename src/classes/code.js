@@ -30,7 +30,8 @@ export default class Code {
 
     createTalisman() {
         let num = Object.entries(this.talismans).length + 1
-        let name = `Talisman${num}` //prompt("Please enter talisman name", `Talisman${num}`);
+        //let name = `Talisman${num}` 
+        let name = prompt("Please enter talisman name", `Talisman${num}`);
         let t = new Talisman(name)
         this.talismans[name] = t
         this.print()
@@ -130,42 +131,3 @@ export default class Code {
 
 
 
-
-
-/* ===========================
-
-DOCS
-
-=========================*/
-
-//Buffer stores an array of objects that the user inputs.
-//ex. [ SpellX SpellY Rune1 Rune2 SpellZ Rune3 Rune4 SpellZ Rune1]
-
-
-/*
-ParsedBuffer is an array of ParsedBufferNodes-
-ParsedBufferNodes are a recursive data structure which is the above buffer split up in the actual spell/args pairing
-PBN are a single function call all the way to the base arguments- representing a single "line" of code.
-
-ex. 
-[
-    PRN{
-        spell: SpellX
-        args: [
-            PRN{
-                spell: SpellY
-                args: [Rune1, Rune2]
-            },
-            PRN{
-                spell: SpellZ
-                args: [Rune3]
-            },
-            Rune4
-        ]
-    },
-    PRN{
-        spell: SpellZ
-        args: [Rune1]
-    }
-]
-*/
